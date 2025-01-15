@@ -6,8 +6,6 @@ by Created by Gerard Beekmans and Managing Editor: Bruce Dubbs
 
 Copyright © 1999-2024 Gerard Beekmans
 
-Copyright © 1999-2024, Gerard Beekmans
-
 All rights reserved.
 
 This book is licensed under a Creative Commons License.
