@@ -61,16 +61,23 @@
 
     <script>
         document.getElementById('go-button').addEventListener('click', function() {
-            const url = document.getElementById('url-input').value;
+            const url = document.getElementById('url-input').value.trim();
             const webView = document.getElementById('web-view');
-            
+
             // Ensure the URL starts with http:// or https://
             if (!url.startsWith('http://') && !url.startsWith('https://')) {
                 alert('Please enter a valid URL starting with http:// or https://');
                 return;
             }
 
-            webView.src = url;
+            // Try loading the URL in the iframe
+            try {
+                webView.src = url;
+                console.log('Loading URL:', url);
+            } catch (error) {
+                console.error('Error loading URL:', error);
+                alert('An error occurred while loading the URL. Please check the console for details.');
+            }
         });
 
         // Allow pressing Enter to submit the URL
