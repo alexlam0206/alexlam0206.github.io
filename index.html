@@ -3,89 +3,551 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Web Browser</title>
+    <title>I.S. 23-24</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
+            padding: 20px;
+            color: #333;
         }
-        #browser-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
-        #url-bar {
-            padding: 10px;
-            display: flex;
-            background-color: #f1f1f1;
-            border-bottom: 1px solid #ccc;
-        }
-        #url-input {
-            flex: 1;
-            padding: 8px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        #go-button {
-            padding: 8px 16px;
-            margin-left: 10px;
-            font-size: 16px;
-            border: none;
-            background-color: #007bff;
+        #timer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #3498db;
             color: white;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #timer button {
+            background-color: #e74c3c;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            margin-left: 10px;
+            border-radius: 3px;
             cursor: pointer;
         }
-        #go-button:hover {
-            background-color: #0056b3;
+        #timer button:hover {
+            background-color: #c0392b;
         }
-        #web-view {
-            flex: 1;
+        #timer #resume {
+            background-color: #2ecc71;
+        }
+        #timer #resume:hover {
+            background-color: #27ae60;
+        }
+        #quiz-container, #results {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .question p {
+            margin: 0 0 10px;
+        }
+        .question label {
+            display: block;
+            margin: 5px 0;
+        }
+        .question img {
+            max-width: 150px;
+            height: auto;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+        select {
+            padding: 5px;
+            border-radius: 4px;
+        }
+        #submit {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
             border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #submit:hover {
+            background-color: #2980b9;
+        }
+        #results h1 {
+            color: #e74c3c;
         }
     </style>
 </head>
 <body>
-    <div id="browser-container">
-        <div id="url-bar">
-            <input type="text" id="url-input" placeholder="Enter a URL (e.g., https://example.com)">
-            <button id="go-button">Go</button>
-        </div>
-        <iframe id="web-view" src="about:blank"></iframe>
+    <div id="timer">
+        <span id="time">40:00</span>
+        <button id="pause">Pause</button>
+        <button id="resume">Resume</button>
     </div>
+    <div id="quiz-container">
+        <h1>IS UT2 23-24 _ 40 minutes</h1>
+        <br>
+        <form id="quiz-form">
+            <!-- True or False Questions -->
+            <p>Section A : True or False Questions</p>
+            <div class="question truefalse">
+                <p>1. Chloroplasts are present in all plant cells.</p>
+                <label><input type="radio" name="tf1" value="True"> True</label>
+                <label><input type="radio" name="tf1" value="False"> False</label>
+            </div>
+            <div class="question truefalse">
+                <p>2. Amoeba is a multicellular organism.</p>
+                <label><input type="radio" name="tf2" value="True"> True</label>
+                <label><input type="radio" name="tf2" value="False"> False</label>
+            </div>
+            <div class="question truefalse">
+                <p>3. Cell membrane gives shape to the cell.</p>
+                <label><input type="radio" name="tf3" value="True"> True</label>
+                <label><input type="radio" name="tf3" value="False"> False</label>
+            </div>
+            <div class="question truefalse">
+                <p>4. Sperms are produced in testes.</p>
+                <label><input type="radio" name="tf4" value="True"> True</label>
+                <label><input type="radio" name="tf4" value="False"> False</label>
+            </div>
+            <div class="question truefalse">
+                <p>5. After cell division, each new individual cell carries half of the genetic materials.</p>
+                <label><input type="radio" name="tf5" value="True"> True</label>
+                <label><input type="radio" name="tf5" value="False"> False</label>
+            </div>
+            <div class="question truefalse">
+                <p>6. A fertilized ovum carries a mix of genetic materials from the father and the mother.</p>
+                <label><input type="radio" name="tf6" value="True"> True</label>
+                <label><input type="radio" name="tf6" value="False"> False</label>
+            </div>
+            <div class="question truefalse">
+                <p>7. Wet dreams are not harmful to the body.</p>
+                <label><input type="radio" name="tf7" value="True"> True</label>
+                <label><input type="radio" name="tf7" value="False"> False</label>
+            </div>
+            <div class="question truefalse">
+                <p>8. At puberty, our body produces more sex hormones.</p>
+                <label><input type="radio" name="tf8" value="True"> True</label>
+                <label><input type="radio" name="tf8" value="False"> False</label>
+            </div>
+            <div class="question truefalse">
+                <p>9. A human cell carries 23 pairs of chromosomes.</p>
+                <label><input type="radio" name="tf9" value="True"> True</label>
+                <label><input type="radio" name="tf9" value="False"> False</label>
+            </div>
+            <div class="question truefalse">
+                <p>10. A light microscope can magnify an object up to 1000000 times.</p>
+                <label><input type="radio" name="tf10" value="True"> True</label>
+                <label><input type="radio" name="tf10" value="False"> False</label>
+            </div>
 
+            <!-- Multiple Choice Questions -->
+            <br>
+            <p>Section B : Multiple Choice Questions</p>
+            <div class="question multiplechoice">
+                <p>11. What is the function of part X in the microscope?</p>
+                <img src="1.png" alt="Microscope Part X">
+                <label><input type="radio" name="mc1" value="A"> A. To hold the slide on the stage</label>
+                <label><input type="radio" name="mc1" value="B"> B. To hold the objective</label>
+                <label><input type="radio" name="mc1" value="C"> C. To support the microscope</label>
+                <label><input type="radio" name="mc1" value="D"> D. To fix the diaphragm</label>
+            </div>
+            <div class="question multiplechoice">
+                <p>12. Which of the following parts in a cell starts the process of cell division?</p>
+                <img src="2.png" alt="Cell Division">
+                <label><input type="radio" name="mc2" value="A"> A. (1)</label>
+                <label><input type="radio" name="mc2" value="B"> B. (2)</label>
+                <label><input type="radio" name="mc2" value="C"> C. (3)</label>
+                <label><input type="radio" name="mc2" value="D"> D. (4)</label>
+            </div>
+            <div class="question multiplechoice">
+                <p>13. Which of the following parts can be found in both man and woman?</p>
+                <label><input type="radio" name="mc3" value="A"> A. Uterus</label>
+                <label><input type="radio" name="mc3" value="B"> B. Urethra</label>
+                <label><input type="radio" name="mc3" value="C"> C. Testis</label>
+                <label><input type="radio" name="mc3" value="D"> D. Ovary</label>
+            </div>
+            <div class="question multiplechoice">
+                <p>14. Which part provides nutrients for the sperms?</p>
+                <label><input type="radio" name="mc4" value="A"> A. Penis</label>
+                <label><input type="radio" name="mc4" value="B"> B. Urethra</label>
+                <label><input type="radio" name="mc4" value="C"> C. Sex glands</label>
+                <label><input type="radio" name="mc4" value="D"> D. Bladder</label>
+            </div>
+            <div class="question multiplechoice">
+                <p>15. Which structures are responsible for producing semen?</p>
+                <img src="3.png" alt="Male Reproductive System">
+                <label><input type="radio" name="mc5" value="A"> A. Structures B and C only</label>
+                <label><input type="radio" name="mc5" value="B"> B. Structures B and H only</label>
+                <label><input type="radio" name="mc5" value="C"> C. Structures B, C and H only</label>
+                <label><input type="radio" name="mc5" value="D"> D. Structures A, B, C and H only</label>
+            </div>
+            <div class="question multiplechoice">
+                <p>16. The diagram on the right shows a plant cell. DNA is found in</p>
+                <img src="4.png" alt="Plant Cell">
+                <label><input type="radio" name="mc6" value="A"> A. Structures A</label>
+                <label><input type="radio" name="mc6" value="B"> B. Structures B</label>
+                <label><input type="radio" name="mc6" value="C"> C. Structures C</label>
+                <label><input type="radio" name="mc6" value="D"> D. Structures D</label>
+            </div>
+            <div class="question multiplechoice">
+                <p>17. Which of the following cell(s) has/have chloroplasts?</p>
+                <label><input type="radio" name="mc7" value="A"> A. (1) only</label>
+                <label><input type="radio" name="mc7" value="B"> B. (3) only</label>
+                <label><input type="radio" name="mc7" value="C"> C. (1) and (2) only</label>
+                <label><input type="radio" name="mc7" value="D"> D. (2) and (3) only</label>
+            </div>
+            <div class="question multiplechoice">
+                <p>18. What will you observe for the letter 'p' under a light microscope?</p>
+                <label><input type="radio" name="mc8" value="A"> A. p</label>
+                <label><input type="radio" name="mc8" value="B"> B. q</label>
+                <label><input type="radio" name="mc8" value="C"> C. d</label>
+                <label><input type="radio" name="mc8" value="D"> D. b</label>
+            </div>
+            <div class="question multiplechoice">
+                <p>19. Which microscope would you expect to observe the greatest number of cells at a time?</p>
+                <img src="5.png" alt="Microscope Types">
+                <label><input type="radio" name="mc9" value="A"> A. 1</label>
+                <label><input type="radio" name="mc9" value="B"> B. 2</label>
+                <label><input type="radio" name="mc9" value="C"> C. 3</label>
+                <label><input type="radio" name="mc9" value="D"> D. 4</label>
+            </div>
+            <div class="question multiplechoice">
+                <p>20. Which of the following statements about DNA in a human cell are correct?</p>
+                <label><input type="radio" name="mc10" value="A"> A. (1) and (2) only</label>
+                <label><input type="radio" name="mc10" value="B"> B. (1) and (3) only</label>
+                <label><input type="radio" name="mc10" value="C"> C. (2) and (3) only</label>
+                <label><input type="radio" name="mc10" value="D"> D. (1), (2) and (3)</label>
+            </div>
+
+            <!-- Fill in the Blanks -->
+            <br>
+            <p>Section C : Fill in the Blanks</p>
+            <div class="question fillblank">
+                <p>21. Name the parts (a) to (d) of the microscope.</p>
+                <img src="6.png" alt="Microscope Diagram">
+                <p>a. <input type="text" name="fb1a"></p>
+                <p>b. <input type="text" name="fb1b"></p>
+                <p>c. <input type="text" name="fb1c"></p>
+                <p>d. <input type="text" name="fb1d"></p>
+            </div>
+            <div class="question fillblank">
+                <p>22. Cells become specialized for particular functions in a process called <input type="text" name="fb2">.</p>
+            </div>
+            <div class="question fillblank">
+                <p>23. In a woman, the process of releasing an ovum from the ovary into the oviduct once a month is called <input type="text" name="fb3">.</p>
+            </div>
+            <div class="question fillblank">
+                <p>24. Cells can carry out a process called <input type="text" name="fb4"> to increase the number of cells.</p>
+            </div>
+            <div class="question fillblank">
+                <p>25. Organisms made up of many cells are known as <input type="text" name="fb5"> organisms.</p>
+            </div>
+            <div class="question fillblank">
+                <p>26. The <input type="text" name="fb6"> adjusts the amount of light entering the microscope.</p>
+            </div>
+            <div class="question fillblank">
+                <p>27. Ovum contains a lot of <input type="text" name="fb7"> substances for early embryo development.</p>
+            </div>
+
+            <!-- Matching Questions -->
+            <br>
+            <p>Section D : Matching Questions</p>
+            <div class="question matching">
+                <p>28. Match the following:</p>
+                <p>1. Chloroplast <select name="match1">
+                    <option value="">Select</option>
+                    <option value="a">a</option>
+                    <option value="b">b</option>
+                    <option value="c">c</option>
+                    <option value="d">d</option>
+                    <option value="e">e</option>
+                </select></p>
+                <p>2. Cell Wall <select name="match2">
+                    <option value="">Select</option>
+                    <option value="a">a</option>
+                    <option value="b">b</option>
+                    <option value="c">c</option>
+                    <option value="d">d</option>
+                    <option value="e">e</option>
+                </select></p>
+                <p>3. Cell membrane <select name="match3">
+                    <option value="">Select</option>
+                    <option value="a">a</option>
+                    <option value="b">b</option>
+                    <option value="c">c</option>
+                    <option value="d">d</option>
+                    <option value="e">e</option>
+                </select></p>
+                <p>4. Cytoplasm <select name="match4">
+                    <option value="">Select</option>
+                    <option value="a">a</option>
+                    <option value="b">b</option>
+                    <option value="c">c</option>
+                    <option value="d">d</option>
+                    <option value="e">e</option>
+                </select></p>
+                <p>5. Vacuole <select name="match5">
+                    <option value="">Select</option>
+                    <option value="a">a</option>
+                    <option value="b">b</option>
+                    <option value="c">c</option>
+                    <option value="d">d</option>
+                    <option value="e">e</option>
+                </select></p>
+                <p>Descriptions:</p>
+                <p>a. The site where many chemical reactions take place.</p>
+                <p>b. Contains a solution of sugars, proteins, minerals and other substances.</p>
+                <p>c. The site where photosynthesis takes place.</p>
+                <p>d. Protects the structures in the cell and gives the cell a regular shape.</p>
+                <p>e. Controls the movement of substances into and out of the cell.</p>
+            </div>
+
+            <!-- Short Questions -->
+            <br>
+            <p>Section E : Short Questions</p>
+            <div class="question shortquestion">
+                <p>29. What is puberty?</p>
+                <textarea name="sq1" rows="4"></textarea>
+            </div>
+            <div class="question shortquestion">
+                <p>30. Explain how osmosis occurs in cells.</p>
+                <textarea name="sq2" rows="4"></textarea>
+            </div>
+
+            <button type="submit" id="submit">Submit Quiz</button>
+        </form>
+    </div>
+    <div id="results" style="display: none;">
+        <h1>Results</h1>
+        <div id="results-content"></div>
+    </div>
     <script>
-        document.getElementById('go-button').addEventListener('click', function() {
-            const url = document.getElementById('url-input').value.trim();
-            const webView = document.getElementById('web-view');
+        // Timer logic
+        let timeLeft = 2400; // 40 minutes in seconds
+        let timerInterval;
 
-            // Ensure the URL starts with http:// or https://
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                alert('Please enter a valid URL starting with http:// or https://');
-                return;
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('time').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                alert('Time is up!');
+                submitQuiz();
             }
+        }
 
-            // Try loading the URL in the iframe
-            try {
-                webView.src = url;
-                console.log('Loading URL:', url);
-            } catch (error) {
-                console.error('Error loading URL:', error);
-                alert('An error occurred while loading the URL. Please check the console for details.');
-            }
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                saveState();
+            }, 1000);
+        }
+
+        document.getElementById('pause').addEventListener('click', () => {
+            clearInterval(timerInterval);
         });
 
-        // Allow pressing Enter to submit the URL
-        document.getElementById('url-input').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                document.getElementById('go-button').click();
+        document.getElementById('resume').addEventListener('click', () => {
+            if (timeLeft > 0 && !timerInterval) startTimer();
+        });
+
+        // Correct answers for objective questions
+        const correctAnswers = {
+            tf1: 'False',
+            tf2: 'False',
+            tf3: 'False',
+            tf4: 'True',
+            tf5: 'False',
+            tf6: 'True',
+            tf7: 'True',
+            tf8: 'True',
+            tf9: 'True',
+            tf10: 'False',
+            mc1: 'A',
+            mc2: 'B',
+            mc3: 'B',
+            mc4: 'C',
+            mc5: 'D',
+            mc6: 'A', // Assumed
+            mc7: 'B', // Assumed
+            mc8: 'C', // Assumed
+            mc9: 'D', // Assumed
+            mc10: 'A', // Assumed
+            fb1a: 'eyepiece',
+            fb1b: 'body tube',
+            fb1c: 'coarse adjustment knob',
+            fb1d: 'objective',
+            fb2: 'cell differentiation',
+            fb3: 'ovulation',
+            fb4: 'cell division',
+            fb5: 'multicellular',
+            fb6: 'diaphragm',
+            fb7: 'food',
+            match1: 'c',
+            match2: 'd',
+            match3: 'e',
+            match4: 'a',
+            match5: 'b'
+        };
+
+        const sampleAnswers = {
+            sq1: 'The stage when the reproductive system becomes mature.',
+            sq2: 'Osmosis is the movement of water across a semipermeable membrane from an area of low solute concentration to an area of high solute concentration.'
+        };
+
+        // Save state
+        function saveState() {
+            let answers = {};
+            document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                answers[radio.name] = radio.value;
+            });
+            document.querySelectorAll('input[type="text"]').forEach(input => {
+                answers[input.name] = input.value;
+            });
+            document.querySelectorAll('textarea').forEach(textarea => {
+                answers[textarea.name] = textarea.value;
+            });
+            document.querySelectorAll('select').forEach(select => {
+                answers[select.name] = select.value;
+            });
+            localStorage.setItem('quizAnswers', JSON.stringify(answers));
+            localStorage.setItem('timeLeft', timeLeft);
+        }
+
+        // Restore state
+        function restoreState() {
+            const savedAnswers = JSON.parse(localStorage.getItem('quizAnswers'));
+            const savedTimeLeft = localStorage.getItem('timeLeft');
+            if (savedAnswers) {
+                for (let name in savedAnswers) {
+                    const value = savedAnswers[name];
+                    const input = document.querySelector(`[name="${name}"]`);
+                    if (input) {
+                        if (input.type === 'radio') {
+                            const radio = document.querySelector(`[name="${name}"][value="${value}"]`);
+                            if (radio) radio.checked = true;
+                        } else if (input.type === 'text' || input.tagName === 'TEXTAREA' || input.tagName === 'SELECT') {
+                            input.value = value;
+                        }
+                    }
+                }
+            }
+            if (savedTimeLeft) {
+                timeLeft = parseInt(savedTimeLeft);
+                updateTimer();
+            }
+        }
+
+        // Quiz submission
+        document.getElementById('quiz-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitQuiz();
+        });
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            localStorage.removeItem('quizAnswers');
+            localStorage.removeItem('timeLeft');
+            let marks = 0;
+            let totalObjectiveMarks = 63; // 10*1 (TF) + 10*2 (MC) + 4*2 (FB Q21) + 6*2 (FB Q22-27) + 5*1 (Match)
+            let resultsHTML = '<h2>Your Results</h2>';
+
+            // True or False
+            for (let i = 1; i <= 10; i++) {
+                const answer = document.querySelector(`input[name="tf${i}"]:checked`)?.value || 'Not answered';
+                const correct = correctAnswers[`tf${i}`];
+                if (answer === correct) marks += 1;
+                resultsHTML += `<p>Question ${i} (T/F): Your answer: ${answer}, Correct answer: ${correct}</p>`;
+            }
+
+            // Multiple Choice
+            for (let i = 1; i <= 10; i++) {
+                const answer = document.querySelector(`input[name="mc${i}"]:checked`)?.value || 'Not answered';
+                const correct = correctAnswers[`mc${i}`];
+                if (answer === correct) marks += 2;
+                resultsHTML += `<p>Question ${i+10} (MC): Your answer: ${answer}, Correct answer: ${correct}</p>`;
+            }
+
+            // Fill in the Blank - Question 21 (parts a-d)
+            const fb1Parts = ['a', 'b', 'c', 'd'];
+            fb1Parts.forEach(part => {
+                const answer = document.querySelector(`input[name="fb1${part}"]`).value.trim().toLowerCase();
+                const correct = correctAnswers[`fb1${part}`];
+                if (answer === correct) marks += 2;
+                resultsHTML += `<p>Question 21${part} (FIB): Your answer: ${answer}, Correct answer: ${correct}</p>`;
+            });
+
+            // Fill in the Blank - Questions 22 to 27
+            for (let i = 2; i <= 7; i++) {
+                const answer = document.querySelector(`input[name="fb${i}"]`).value.trim().toLowerCase();
+                const correct = correctAnswers[`fb${i}`];
+                if (answer === correct) marks += 2;
+                resultsHTML += `<p>Question ${i+19} (FIB): Your answer: ${answer}, Correct answer: ${correct}</p>`;
+            }
+
+            // Matching
+            for (let i = 1; i <= 5; i++) {
+                const answer = document.querySelector(`select[name="match${i}"]`).value || 'Not answered';
+                const correct = correctAnswers[`match${i}`];
+                if (answer === correct) marks += 1;
+                resultsHTML += `<p>Matching ${i}: Your answer: ${answer}, Correct answer: ${correct}</p>`;
+            }
+
+            // Short Questions
+            for (let i = 1; i <= 2; i++) {
+                const answer = document.querySelector(`textarea[name="sq${i}"]`).value.trim();
+                resultsHTML += `<p>Short Question ${i}: Your answer: ${answer}<br>Sample answer: ${sampleAnswers[`sq${i}`]}<br>(To be marked manually)</p>`;
+            }
+
+            resultsHTML = `<p>Objective Marks: ${marks} / ${totalObjectiveMarks}</p>` + resultsHTML;
+            document.getElementById('results-content').innerHTML = resultsHTML;
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+        }
+
+        // Event listeners for auto-save
+        document.querySelectorAll('input, select, textarea').forEach(input => {
+            if (input.type === 'radio' || input.tagName === 'SELECT') {
+                input.addEventListener('change', saveState);
+            } else if (input.type === 'text' || input.tagName === 'TEXTAREA') {
+                input.addEventListener('input', saveState);
             }
         });
+        window.addEventListener('beforeunload', saveState);
+
+        // Initialize
+        restoreState();
+        startTimer();
     </script>
 </body>
-</html>
+</html>v
