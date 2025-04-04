@@ -6,7 +6,7 @@
     function isMobileDevice() {
       return /Mobi|Android|iPhone/i.test(navigator.userAgent);
     }
-
+ 
     window.onload = function () {
       if (isMobileDevice()) {
         document.getElementById('desktop').style.display = 'none';
